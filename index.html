@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeetSync | Smart Schedule Matcher</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo-icon"><i class="ph-bold ph-intersect-three"></i></div>
+      MeetSync
+    </div>
+    <div class="header-right">
+      <span class="workspace-badge"><span class="dot"></span> Workspace</span>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <aside class="sidebar">
+      <div class="sidebar-content">
+        <h2 class="sidebar-title">Pengaturan Jadwal</h2>
+        
+        <div class="control-group">
+          <label>1. Identitas Peserta</label>
+          <div class="input-wrapper">
+            <i class="ph ph-user"></i>
+            <input type="text" id="userName" placeholder="Ketik namamu..." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>2. Tandai Jadwal Sibukmu</label>
+          <div class="info-box">
+            <i class="ph-fill ph-info"></i>
+            <p><strong>Drag</strong> kursor/jari pada kalender untuk menandai jam sibuk (kuliah/agenda).</p>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>3. Bagikan ke Grup</label>
+          <button class="btn btn-primary" onclick="generateShareLink()">
+            <i class="ph-bold ph-link-simple"></i> Copy Link Invitation
+          </button>
+          <input type="text" id="shareLink" readonly class="link-input" placeholder="Link akan muncul di sini...">
+        </div>
+
+        <hr class="divider">
+
+        <div class="participant-section">
+          <div class="section-header">
+            <h4>Partisipan <span class="count-badge" id="userCount">0</span></h4>
+          </div>
+          <div class="badges-container" id="participantBadges">
+            <div class="empty-state-mini">Belum ada peserta.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn btn-success" onclick="findIntersection()">
+          <i class="ph-bold ph-magic-wand"></i> Temukan Waktu Rapat
+        </button>
+        <button class="btn btn-ghost" onclick="resetApp()">
+          <i class="ph ph-arrow-counter-clockwise"></i> Reset Kalender
+        </button>
+      </div>
+    </aside>
+
+    <main class="grid-area">
+      <div class="canvas-header">
+        <div class="title-meta">
+          <h3>Kalender Sinkronisasi</h3>
+          <p class="subtitle">Klik & tahan kursor untuk memilih slot.</p>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><div class="box box-free"></div> <span>Kosong</span></div>
+          <div class="legend-item"><div class="box box-busy"></div> <span>Sibuk</span></div>
+          <div class="legend-item"><div class="box box-matched"></div> <span>Jadwal Deal!</span></div>
+        </div>
+      </div>
+      
+      <div class="calendar-card">
+        <div class="calendar-header" id="calHeader">
+          <div class="col-header time-col">GMT+7</div>
+        </div>
+        <div class="calendar-body" id="calBody"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="script.js"></script>
+</body>
+</html>
